@@ -42,11 +42,20 @@ namespace EX33_hint
                 && rectAngle1.height == rectAngle2.width);
         }
         
-        public static float operator +(RectAngle rectAngle1, RectAngle rectAngle2)
+        public static RectAngle operator +(RectAngle rectAngle1, RectAngle rectAngle2)
         {
-            var h = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
-            var w = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
-            return h * w;
+            float h, w;
+            if (MathF.Min(rectAngle1.height, rectAngle1.width) == MathF.Min(rectAngle2.height, rectAngle2.width))
+            {
+                h = MathF.Max(rectAngle1.height, rectAngle1.width) + MathF.Max(rectAngle2.height, rectAngle2.width);
+                w = MathF.Min(rectAngle1.height, rectAngle1.width);
+            }
+            else
+            {
+                h = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
+                w = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
+            }
+            return new RectAngle(h, w);
         }
     }
 }
