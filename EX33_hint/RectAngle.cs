@@ -44,18 +44,21 @@ namespace EX33_hint
         
         public static RectAngle operator +(RectAngle rectAngle1, RectAngle rectAngle2)
         {
-            float h, w;
-            if (MathF.Min(rectAngle1.height, rectAngle1.width) == MathF.Min(rectAngle2.height, rectAngle2.width))
+            float h1, w1, h2, w2, s1, s2;
+            h1 = MathF.Max(rectAngle1.height, rectAngle1.width) + MathF.Max(rectAngle2.height, rectAngle2.width);
+            w1 = MathF.Max(MathF.Min(rectAngle1.height, rectAngle1.width),MathF.Min(rectAngle2.height,rectAngle2.width));
+            s1 = h1 * w1;
+            h2 = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
+            w2 = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
+            s2 = h2 * w2;
+            if (s1 < s2)
             {
-                h = MathF.Max(rectAngle1.height, rectAngle1.width) + MathF.Max(rectAngle2.height, rectAngle2.width);
-                w = MathF.Min(rectAngle1.height, rectAngle1.width);
+                return new RectAngle(h1, w1);
             }
             else
             {
-                h = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
-                w = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
+                return new RectAngle(h2, w2);
             }
-            return new RectAngle(h, w);
         }
     }
 }
