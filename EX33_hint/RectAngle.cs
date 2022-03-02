@@ -44,38 +44,22 @@ namespace EX33_hint
         
         public static RectAngle operator +(RectAngle rectAngle1, RectAngle rectAngle2)
         {
-            float h1, w1, h2, w2, h3, w3, h4, w4, s1, s2, s3, s4, rect;
+            float h1, w1, h2, w2,  s1, s2, rect;
             h1 = MathF.Max(rectAngle1.height, rectAngle1.width) + MathF.Max(rectAngle2.height, rectAngle2.width);
             w1 = MathF.Max(MathF.Min(rectAngle1.height, rectAngle1.width),MathF.Min(rectAngle2.height,rectAngle2.width));
             s1 = h1 * w1;
             h2 = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
             w2 = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
             s2 = h2 * w2;
-            h3 = MathF.Max(MathF.Min(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
-            w3 = MathF.Max(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
-            s3 = h3 * w3;
-            h4 = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Min(rectAngle2.height, rectAngle2.width));
-            w4 = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Max(rectAngle2.height, rectAngle2.width);
-            s4 = h4 * w4;
             rect = MathF.Min(s1, s2);
-            rect = MathF.Min(rect, s3);
-            rect = MathF.Min(rect, s4);
 
             if (rect == s1)
             {
                 return new RectAngle(w1, h1);
             }
-            else if (rect == s2)
-            {
-                return new RectAngle(w2, h2);
-            }
-            else if (rect == s3)
-            {
-                return new RectAngle(w3, h3);
-            }
             else
             {
-                return new RectAngle(w4, h4);
+                return new RectAngle(w2, h2);
             }
         }
     }
