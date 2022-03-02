@@ -63,19 +63,19 @@ namespace EX33_hint
 
             if (rect == s1)
             {
-                return new RectAngle(h1, w1);
+                return new RectAngle(w1, h1);
             }
             else if (rect == s2)
             {
-                return new RectAngle(h2, w2);
+                return new RectAngle(w2, h2);
             }
             else if (rect == s3)
             {
-                return new RectAngle(h3, w3);
+                return new RectAngle(w3, h3);
             }
             else
             {
-                return new RectAngle(h4, w4);
+                return new RectAngle(w4, h4);
             }
         }
     }
