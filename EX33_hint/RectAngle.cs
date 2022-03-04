@@ -61,7 +61,7 @@ namespace EX33_hint
                 MathF.Max(rectAngle1.shorter,rectAngle2.shorter));
             var rectAngleB  = new RectAngle(
                 MathF.Max(rectAngle1.longer, rectAngle2.longer),
-                rectAngle1.shorter + rectAngle2.shorter);
+                rectAngle1.shorter + rectAngle2.longer);
             return (rectAngleA.GetSurface() < rectAngleB.GetSurface())
                 ? rectAngleA : rectAngleB;
         }
