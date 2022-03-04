@@ -8,10 +8,22 @@ namespace EX33_hint
     {
         readonly public float width;
         readonly public float height;
+        readonly public float shorter;
+        readonly public float longer;
         public RectAngle(float width = 0, float height = 0)
         {
             this.width = width;
             this.height = height;
+            if (height < width)
+            {
+                shorter = height;
+                longer = width;
+            }
+            else
+            {
+                shorter = width;
+                longer = height;
+            }
         }
         public float GetSurface()
         {
@@ -44,22 +56,14 @@ namespace EX33_hint
         
         public static RectAngle operator +(RectAngle rectAngle1, RectAngle rectAngle2)
         {
-            float h1, w1, h2, w2,  s1, s2;
-            h1 = MathF.Max(rectAngle1.height, rectAngle1.width) + MathF.Max(rectAngle2.height, rectAngle2.width);
-            w1 = MathF.Max(MathF.Min(rectAngle1.height, rectAngle1.width),MathF.Min(rectAngle2.height,rectAngle2.width));
-            s1 = h1 * w1;
-            h2 = MathF.Max(MathF.Max(rectAngle1.height, rectAngle1.width), MathF.Max(rectAngle2.height, rectAngle2.width));
-            w2 = MathF.Min(rectAngle1.height, rectAngle1.width) + MathF.Min(rectAngle2.height, rectAngle2.width);
-            s2 = h2 * w2;
-
-            if (s1 < s2)
-            {
-                return new RectAngle(w1, h1);
-            }
-            else
-            {
-                return new RectAngle(w2, h2);
-            }
+            var rectAngleA = new RectAngle(
+                rectAngle1.longer+rectAngle2.longer,
+                MathF.Max(rectAngle1.shorter,rectAngle2.shorter));
+            var rectAngleB  = new RectAngle(
+                MathF.Max(rectAngle1.longer, rectAngle2.longer),
+                rectAngle1.shorter + rectAngle2.shorter);
+            return (rectAngleA.GetSurface() < rectAngleB.GetSurface())
+                ? rectAngleA : rectAngleB;
         }
     }
 }
